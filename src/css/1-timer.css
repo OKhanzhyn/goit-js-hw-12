@@ -4,7 +4,9 @@ input {
   margin-top: 36px;
   margin-left: 156px;
   margin-bottom: 36px;
-  /* gap: 8px; */
+  padding-left: 16px;
+  vertical-align: middle;
+  /* padding-top: 8px; */
   border-radius: 4px;
   font-family: Montserrat;
   font-weight: 400;
@@ -27,6 +29,22 @@ input:hover {
 }
 
 button {
+  Width: 75px;
+  Height: 40px;
+  margin-left: 4px;
+  border-radius: 8px;
+  Padding: 8px, 16px, 8px, 16px;
+  background-color: #4E75FF;
+  font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: 
+    #FFFFFF;
+    border: none;
+  }
+
+button {
 Width: 75px;
 Height: 40px;
 margin-left: 4px;
@@ -45,6 +63,8 @@ button:hover {
  background-color: #6C8CFF;
  color: #FFFFFF;
 }
+
+
 
 .field {
   /* Width: 61px; */

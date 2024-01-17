@@ -28,7 +28,7 @@ input:hover {
   margin-left: 156px;
 }
 
-button {
+button[data-start] {
   Width: 75px;
   Height: 40px;
   margin-left: 4px;
@@ -43,26 +43,16 @@ button {
     #FFFFFF;
     border: none;
   }
+  button[data-start]:hover {
+    background-color: #6C8CFF;
+    color: #FFFFFF;
+   }
 
-button {
-Width: 75px;
-Height: 40px;
-margin-left: 4px;
-border-radius: 8px;
-Padding: 8px, 16px, 8px, 16px;
-/* Gap: 10px; */
+   button[data-start]:disabled {
 background-color: #CFCFCF;
-font-family: Montserrat;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
   color: #989898;
-  border: none;
 }
-button:hover {
- background-color: #6C8CFF;
- color: #FFFFFF;
-}
+
 
 
 

@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
-const startBtn = document.querySelector('button [type="button"]');
+const startBtn = document.querySelector('button[data-start]');
 const timerFace = document.querySelector(".timer");
 
 const inputInit = document.querySelector('input#datetime-picker');
@@ -16,10 +16,14 @@ const options = {
     console.log(selectedDates[0]);
     const currentTime = Date.now();
     if (selectedDates[0] <= currentTime) {
-      
-    return window.alert("Please choose a date in the future");}
+      // const disabledBtn = document.getElement('button[data-start]:disabled');
+      // this.startBtn = this.disabledBtn;
+      window.alert("Please choose a date in the future");
+    return }
     else {
   userSelectedDate.push(selectedDates);
+  // document.getElementsByTagName('button').active = 'true';
+  // element = document.getElement('button:active');
    } },
 };
 flatpickr(inputInit, options); 

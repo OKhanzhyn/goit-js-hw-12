@@ -42,6 +42,7 @@ button[data-start] {
     color: 
     #FFFFFF;
     border: none;
+    cursor: auto;
   }
   button[data-start]:hover {
     background-color: #6C8CFF;
@@ -51,6 +52,7 @@ button[data-start] {
    button[data-start]:disabled {
 background-color: #CFCFCF;
   color: #989898;
+  cursor: not-allowed;
 }
 
 

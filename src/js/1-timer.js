@@ -3,10 +3,10 @@ import "flatpickr/dist/flatpickr.min.css";
 
 const startBtn = document.querySelector('button[data-start]');
 const timerFace = document.querySelector(".timer");
-
 const inputInit = document.querySelector('input#datetime-picker');
 
-let userSelectedDate = ('');
+startBtn.disabled = true;
+let userSelectedDate = '';
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -15,27 +15,45 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     const currentTime = Date.now();
-    if (selectedDates[0] <= currentTime) {
-      // const disabledBtn = document.getElement('button[data-start]:disabled');
-      // this.startBtn = this.disabledBtn;
+    console.log(currentTime);
+    if (selectedDates[0] <= currentTime) {     
+      startBtn.disabled = true; 
       window.alert("Please choose a date in the future");
-    return }
+    // return
+   }
     else {
-  userSelectedDate.push(selectedDates);
-  // document.getElementsByTagName('button').active = 'true';
-  // element = document.getElement('button:active');
+      startBtn.disabled = false;
+  userSelectedDate.push(selectedDates[0]);
    } },
 };
 flatpickr(inputInit, options); 
  
 
-
-
-//   Вибір дати
-
 // Відлік часу
 // Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
 
+
+// const selectors = {
+  // digitalTimer: document.querySelector(".timer"),
+  const days = document.querySelector("span[data-days]");
+  const hours = document.querySelector("span[data-hours]");
+  const minutes = document.querySelector("span[data-minutes]");
+  const seconds = document.querySelector("span[data-seconds]");  
+// };
+
+
+let diff = userSelectedDate - Date.now();
+
+const countdown = setInterval(function() {
+const timerDisplay = convertMs(diff);
+//  console.log(timerDisplay);
+ document.getElementsByClassName(".timer");
+ document.getElementsByTagName("span[data-days]");
+ document.getElementsByName("hours");
+ document.getElementsByName("minutes");
+ document.getElementsByName("[data-seconds]");
+}, 1000);
+// console.log(countdown);
 
 function convertMs(ms) {
     // Number of milliseconds per unit of time
@@ -62,14 +80,13 @@ function convertMs(ms) {
   //   return String(value).padStart(2, "0");
   // }
 
-  const timer = new Timer({
-    onTick: updateTimerFace,
-  });
+  // const timer = new Timer({
+  //   onTick: updateTimerFace,
+  // });
   
-  
-  startBtn.addEventListener("click", timer.start.bind(timer));
-  function updateTimerFace({ days, hours, mins, secs }) {
-    timerFace.textContent = `${days}:${hours}:${mins}:${secs}`;
+  // startBtn.addEventListener("click", timer.start.bind(timer));
+  function updateTimerFace({ days, hours, minutes, seconds }) {
+    timerFace.textContent = `${days}:${hours}:${minutes}:${seconds}`;
   }
 
   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}

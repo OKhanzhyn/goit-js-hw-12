@@ -52,9 +52,9 @@ document.getElementsByTagName("span[data-days]").innerHTML = timeOnDisplay;
 console.log(timeOnDisplay);
 }, 1000);
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, "0");
-)
+// function addLeadingZero(value) {
+//   return String(value).padStart(2, "0");
+// )
 
 timerFace.addEventListener('input', convertMs);
 startBtn.addEventListener("click", convertMs);
@@ -70,13 +70,13 @@ function convertMs(ms) {
     const day = hour * 24;
   
     // Remaining days
-    const days = addLeadingZero(Math.floor(ms / day));
+    const days = Math.floor(ms / day);
     // Remaining hours
-    const hours = addLeadingZero(Math.floor((ms % day) / hour));
+    const hours = Math.floor((ms % day) / hour);
     // Remaining minutes
-    const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+    const minutes = Math.floor(((ms % day) % hour) / minute);
     // Remaining seconds
-    const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
+    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   
     return { days, hours, minutes, seconds };
   }

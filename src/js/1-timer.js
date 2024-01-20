@@ -33,34 +33,38 @@ flatpickr(inputInit, options);
 // Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
 
 
-// const selectors = {
-  // digitalTimer: document.querySelector(".timer"),
   const days = document.querySelector("span[data-days]");
   const hours = document.querySelector("span[data-hours]");
   const minutes = document.querySelector("span[data-minutes]");
   const seconds = document.querySelector("span[data-seconds]");  
-// };
 
 
-const countdown = setInterval(function() {
-const diff = userSelectedDate - Date.now();
-const timeOnDisplay = convertMs(diff);
-document.getElementsByTagName("span[data-days]").innerHTML = timeOnDisplay;
+startBtn.addEventListener("click", updateTimerFace);
+function updateTimerFace(event) {
+  const countdown = setInterval(function() {
+    const diff = userSelectedDate - Date.now();
+    const timeOnDisplay = convertMs(diff);
+    const { days, hours, minutes, seconds } = convertMs(diff);
+    const timerDays = addLeadingZero(days);
+    const timerHours = addLeadingZero(hours);
+    const timerMin = addLeadingZero(minutes);
+    const timerSec = addLeadingZero(seconds);
 
+    document.getElementsByTagName("span[data-days]").innerHTML = timerDays;
+    document.getElementsByTagName("span[data-hours]").innerHTML = timerHours;
+    document.getElementsByTagName("span[data-minutes]").innerHTML = timerMin;
+    document.getElementsByTagName("span[data-seconds]").innerHTML = timerSec;
 
-// console.log(diff);
-console.log(timeOnDisplay);
-}, 1000);
+    console.log(timeOnDisplay);
+    }, 1000);
 
-// function addLeadingZero(value) {
-//   return String(value).padStart(2, "0");
-// )
-
-timerFace.addEventListener('input', convertMs);
-startBtn.addEventListener("click", convertMs);
-function updateTimerFace({ days, hours, minutes, seconds }) {
-  timerFace.textContent = `${days}:${hours}:${minutes}:${seconds}`;
+  function addLeadingZero(value) { 
+    return String(value).padStart(2, "0");
+  }
 }
+
+// timerFace.addEventListener('input', convertMs);
+// timerFace.textContent = `${days}:${hours}:${minutes}:${seconds}`;
 
 function convertMs(ms) {
     // Number of milliseconds per unit of time
@@ -80,16 +84,6 @@ function convertMs(ms) {
   
     return { days, hours, minutes, seconds };
   }
-
-
-  // ???????
- 
-
-  // const timer = new Timer({
-  //   onTick: updateTimerFace,
-  // });
-   
-  // startBtn.addEventListener("click", timer.start.bind(timer));
   
 
   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}

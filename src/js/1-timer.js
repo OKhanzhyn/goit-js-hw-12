@@ -1,5 +1,9 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+// Описаний у документації
+import iziToast from "izitoast";
+// Додатковий імпорт стилів
+import "izitoast/dist/css/iziToast.min.css";
 
 const startBtn = document.querySelector('button[data-start]');
 const timerFace = document.querySelector(".timer");
@@ -15,10 +19,14 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     const currentTime = Date.now();
-    console.log(currentTime);
+    
     if (selectedDates[0] <= currentTime) {     
       startBtn.disabled = true; 
-      window.alert("Please choose a date in the future");
+      // window.alert("Please choose a date in the future");
+      iziToast.error({
+        title: 'Error',
+        message: 'Illegal operation',
+    });
     // return
    }
     else {
@@ -40,20 +48,35 @@ flatpickr(inputInit, options);
 
 
 startBtn.addEventListener("click", updateTimerFace);
+
 function updateTimerFace(event) {
   const countdown = setInterval(function() {
+    startBtn.disabled = true; 
     const diff = userSelectedDate - Date.now();
     const timeOnDisplay = convertMs(diff);
     const { days, hours, minutes, seconds } = convertMs(diff);
-    const timerDays = addLeadingZero(days);
-    const timerHours = addLeadingZero(hours);
-    const timerMin = addLeadingZero(minutes);
-    const timerSec = addLeadingZero(seconds);
-
-    document.getElementsByTagName("span[data-days]").innerHTML = timerDays;
-    document.getElementsByTagName("span[data-hours]").innerHTML = timerHours;
-    document.getElementsByTagName("span[data-minutes]").innerHTML = timerMin;
-    document.getElementsByTagName("span[data-seconds]").innerHTML = timerSec;
+    let timerDays = addLeadingZero(days);
+    let timerHours = addLeadingZero(hours);
+    let timerMin = addLeadingZero(minutes);
+    let timerSec = addLeadingZero(seconds);
+    
+    document.querySelector("span[data-days]").innerHTML = timerDays;
+    document.querySelector("span[data-hours]").innerHTML = timerHours;
+    document.querySelector("span[data-minutes]").innerHTML = timerMin;
+    document.querySelector("span[data-seconds]").innerHTML = timerSec;
+    
+days.timerDays;
+hours.timerHours;
+minutes.timerMin;
+seconds.timerSec;
+if (
+  timeOnDisplay.days <= 0 &&
+  timeOnDisplay.hours <= 0 &&
+  timeOnDisplay.minutes <= 0 &&
+  timeOnDisplay.seconds <= 0
+) {
+  clearInterval(countdown);
+};
 
     console.log(timeOnDisplay);
     }, 1000);
@@ -62,9 +85,6 @@ function updateTimerFace(event) {
     return String(value).padStart(2, "0");
   }
 }
-
-// timerFace.addEventListener('input', convertMs);
-// timerFace.textContent = `${days}:${hours}:${minutes}:${seconds}`;
 
 function convertMs(ms) {
     // Number of milliseconds per unit of time

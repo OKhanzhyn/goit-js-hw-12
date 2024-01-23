@@ -25,9 +25,9 @@ const options = {
       // window.alert("Please choose a date in the future");
       iziToast.error({
         title: 'Error',
-        message: 'Illegal operation',
+        message: 'Please choose a date in the future.',
     });
-    // return
+    
    }
     else {
       startBtn.disabled = false;

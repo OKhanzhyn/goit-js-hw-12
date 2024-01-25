@@ -20,8 +20,8 @@ event.preventDefault();
  //Вибираємо усі елементи форми
  const formElements = form.elements;
 setTimeout(() => {
-if () {
-    
+if (formElements = fulfilled) {
+
 }
 })
 

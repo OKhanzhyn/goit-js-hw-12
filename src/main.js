@@ -13,6 +13,7 @@ const API_KEY = '42048563-a2c01b7234988bf152885bd8d';
 const refs = {
     form: document.getElementById('form'),
     resultContainer: document.getElementById('resultContainer'),
+    gallery: document.getElementsByClassName('.gallery'),
 };
 
 refs.form.addEventListener('submit', handleSearch);
@@ -36,7 +37,10 @@ function handleSearch(event) {
        }).join('');
       
 
-      refs.resultContainer.innerHTML = markup;
+      refs.gallery.innerHTML = markup;
+      
+    //   const gallery = $('.gallery a').SimpleLightbox();
+      lightbox .refresh();
 
 
       if (listOfPhotos.length === 0) {
@@ -77,8 +81,7 @@ function searchPhotoByWrd(photoWrd) {
 
 function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views, comments, downloads,
 }) {
-    return `
-    <ul class="gallery">
+    return `    
     <li class="photo_card">
     <a class="photo_link" href="${webformatURL}">
     <img class="photoLarge" src="${largeImageURL}" alt="${tags}"/>
@@ -87,8 +90,7 @@ function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views,
     <p class="comments">comments: "${comments}"</p>
     <p class="downloads">downloads: "${downloads}"</p>
     </a>
-    </li>
-    </ul>`;
+    </li>`;
 }
 
 
@@ -97,7 +99,7 @@ caption: true,
 captionDelay: 250,
 fadeSpeed: 250,
 captionSelector: "img",
-captionData: "alt",
+captionsData: "alt",
 captionPosition: "bottom",}); 
 
 // var gallery = $('.gallery a').simpleLightbox();

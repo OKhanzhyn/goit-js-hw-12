@@ -14,7 +14,7 @@ const refs = {
     form: document.getElementById('form'),
     resultContainer: document.getElementById('resultContainer'),
     loaderContainer: document.getElementsByClassName('.loader'),
-    gallery: document.getElementsByClassName('.gallery'),
+    gallery: document.querySelector('.gallery'),
 };
 
 refs.form.addEventListener('submit', handleSearch);
@@ -29,23 +29,9 @@ function handleSearch(event) {
     
     searchPhotoByWrd(photoWrd).then((data) => {
       console.log(data);
-      
-      const listOfPhotos = data.hits;
-      let markup = "";
-      listOfPhotos.map((i) => {
-        
-       console.log(i);
-       markup += createPhotoCardMarkup(i);
-       }).join('');
-       
 
-      refs.gallery.innerHTML = markup;
-      
-    //   const gallery = $('.gallery a').SimpleLightbox();
-      lightbox .refresh();
-
-
-      if (listOfPhotos.length === 0) {
+     
+        if (data.hits.length === 0) {
         iziToast.error({
             // title: 'Error',
             class:'error-svg',
@@ -59,6 +45,17 @@ function handleSearch(event) {
             timeout: 5000,
         });   return;
       }
+      //   const listOfPhotos = data.hits;
+      let markup = "";
+      refs.gallery.innerHTML = markup;
+      data.hits.forEach((i) => {
+        
+       console.log(i);
+       markup += createPhotoCardMarkup(i);
+       });      
+      
+    //   const gallery = $('.gallery a').SimpleLightbox();
+      lightbox .refresh();
           
     })
     .finally(() => {        

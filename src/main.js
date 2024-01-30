@@ -13,6 +13,7 @@ const API_KEY = '42048563-a2c01b7234988bf152885bd8d';
 const refs = {
     form: document.getElementById('form'),
     resultContainer: document.getElementById('resultContainer'),
+    loaderContainer: document.getElementsByClassName('.loader'),
     gallery: document.getElementsByClassName('.gallery'),
 };
 
@@ -25,17 +26,18 @@ function handleSearch(event) {
     const photoWrd = form.elements.photoWrd.value;
     console.log(photoWrd);
     
-    // showLoader();
+    
     searchPhotoByWrd(photoWrd).then((data) => {
       console.log(data);
       
       const listOfPhotos = data.hits;
       let markup = "";
       listOfPhotos.map((i) => {
+        
        console.log(i);
        markup += createPhotoCardMarkup(i);
        }).join('');
-      
+       
 
       refs.gallery.innerHTML = markup;
       
@@ -44,7 +46,7 @@ function handleSearch(event) {
 
 
       if (listOfPhotos.length === 0) {
-        iziToast.show({
+        iziToast.error({
             // title: 'Error',
             class:'error-svg',
             message: "Sorry, there are no images matching your search query. Please try again!",
@@ -53,12 +55,14 @@ function handleSearch(event) {
             messageColor: 'white',
             backgroundColor: '#ef4040',
             position: 'topRight',
+            maxWidth: '390px',
             timeout: 5000,
         });   return;
       }
+          
     })
-    .finally(() => {
-        // hideLoader();
+    .finally(() => {        
+       
         form.reset()});
 }
 
@@ -72,11 +76,12 @@ function searchPhotoByWrd(photoWrd) {
     });
     return fetch(`${BASE_URL}/?${urlParams}`).then((res) => {
         if (!res.ok) {
-        throw new Error(res.statusText);
-        
+        throw new Error(res.statusText);      
         }
+       
         return res.json();
     }).catch(error => console.log(error))  
+    
 }  
 
 function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views, comments, downloads,
@@ -102,6 +107,8 @@ captionSelector: "img",
 captionsData: "alt",
 captionPosition: "bottom",}); 
 
+//   showLoader();
+ // hideLoader();
 // var gallery = $('.gallery a').simpleLightbox();
 
 // <div class="gallery">

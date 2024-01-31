@@ -23,12 +23,9 @@ function handleSearch(event) {
 
     const form = event.currentTarget;
     const photoWrd = form.elements.photoWrd.value;
-    console.log(photoWrd);
-     
-    
-    searchPhotoByWrd(photoWrd).then((data) => {
-        
-      console.log(data);
+         
+    refs.loaderContainer.style.display = 'block';
+    searchPhotoByWrd(photoWrd).then((data) => {   console.log(data);
        
        if (data.hits.length === 0) {
         iziToast.error({
@@ -43,27 +40,18 @@ function handleSearch(event) {
         });   return;
       }
        
-    let markup = "";
-    
+    let markup = "";    
       data.hits.forEach((i) => {        
-       console.log(i);
-       
+    //    console.log(i);
        markup += createPhotoCardMarkup(i);
-       
-       });    
-         
+       });             
     refs.gallery.innerHTML = markup;
     lightbox .refresh();      
     }).finally(() => {               
-        
-      form.reset()});
-}
-
-// loaderContainer.style.display = 'block';
-// loaderContainer.style.display = 'none';
+        refs.loaderContainer.style.display = 'none';
+      form.reset()});}
 
 function searchPhotoByWrd(photoWrd) {
-
     const urlParams = new URLSearchParams({
         key: API_KEY,
         q: photoWrd,
@@ -104,8 +92,7 @@ function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views,
       <p class="property-title">Downloads</p>
       <p class="property-value">${downloads}</p>
     </li>
-  </ul>  
-    
+  </ul>      
     </a>
     </li>`;
 }
@@ -117,93 +104,3 @@ fadeSpeed: 250,
 captionSelector: "img",
 captionsData: "alt",
 captionPosition: "bottom",}); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const loadingTextEl = document.querySelector('.loading-message');
-// const loaderEl = document.querySelector('.loader');
-
-/**
-  |==============================
-  | ----css-Loader activation---
-  |==============================
-*/
-/*
-document.addEventListener('DOMContentLoaded', () => {
-    // const formEl = document.querySelector('.search-form');
-    // const loadingMessageEl = document.querySelector('.loading-message');
-  
-    if (!loaderContainer) {
-      console.error('Form or loading message element not found.');
-      return;
-    }  
-    loaderContainer.style.display = 'none';
-  
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-  
-    //   const searchKey = form.elements.search.value.trim();
-  
-      if (!photoWrd) {
-        createMessage('Search must be filled!');
-        return;
-      }
-  
-      formEl.reset();
-  
-      try {
-        loaderContainer.style.display = 'block';
-        await downloadImages(photoWrd);
-      } catch (error) {
-        console.error('Error downloading images:', error.message);
-        createMessage('Error downloading images. Please try again later.');
-      } finally {
-        loaderContainer.style.display = 'none';
-      }
-})
-});
-
-function downloadImages(photoWrd) {
-  loaderContainer.style.display = 'block';
-//   buttonEl.disabled = true;
-//   buttonEl.blur();
-  gallery.innerHTML = '';
-
-  fetchImages(photoWrd)
-    .then(images => renderImages(images))
-    .catch(error => {
-      console.error(error);
-      createMessage('Error fetching images. Please try again later.');
-    })
-    .finally(() => {
-    loaderContainer.style.display = 'none';
-    //   buttonEl.disabled = false;
-    });
-}
-*/
-
-
-
-
-
-
-// showloader();
- // hideLoader(); 
-// var gallery = $('.gallery a').simpleLightbox();
-
-// <div class="gallery">
-//     <a href="images/image1.jpg"><img src="images/thumbs/thumb1.jpg" alt="" title=""/></a>
-//     <a href="images/image2.jpg"><img src="images/thumbs/thumb2.jpg" alt="" title="Beautiful Image"/></a>
-// </div>
-
-// gallery.next(); // Next Image

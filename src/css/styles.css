@@ -7,9 +7,10 @@
 @import url('./reset.css');
 @import url('./vite-promo.css');
 
-*:focus {
+/* *:focus {
   outline: none;
-}
+} */
+
  :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -27,17 +28,15 @@
 } 
 
 .loader {
-  display: flex; /*додано*/
-
   color: #2E2F42;
-  display: inline-block;
   position: relative;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04px;
   font-family: Montserrat;
   box-sizing: border-box;
-}
+  display: none;
+  }
 .loader::after {
   content: '';  
   width: 2px;
@@ -91,6 +90,7 @@ input[type="text"] {
   padding-left: 16px;
   padding-right: 8px;
   margin: 0;
+  outline: none;
 }
 input[type="text"]:hover {
   border-color: #000000;

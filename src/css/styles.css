@@ -27,6 +27,8 @@
 } 
 
 .loader {
+  display: flex; /*додано*/
+
   color: #2E2F42;
   display: inline-block;
   position: relative;
@@ -35,7 +37,6 @@
   letter-spacing: 0.04px;
   font-family: Montserrat;
   box-sizing: border-box;
-  margin-left: 592px;
 }
 .loader::after {
   content: '';  
@@ -60,6 +61,11 @@
     box-shadow: 10px 0 #2E2F42, 20px 0 #2E2F42;
   }
 }
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
 form[id="form"] {
   display: flex;
   align-items: center;
@@ -80,7 +86,6 @@ input[type="text"] {
   padding-left: 16px;
   padding-right: 8px;
   margin-bottom: 35px;
-  margin-left: 540px;
   margin-top: 35px;
 }
 input[type="text"]:hover {
@@ -107,19 +112,67 @@ button[type="submit"]:hover {
 }
 
 div[id="resultContainer"] {
-  width: 1128px;
-  display: flex;
-  align-items: center;
+  display: flex; 
+  align-items: center; 
+  align-content: center;
+  padding: 0;
 }
-.gallery {
-  width: 1128px;
+.gallery { 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap; 
+  justify-content: center;
+  width: 1128px;
   gap: 8px;
   row-gap: 8px;
+  padding: 0;
+  margin: 0;
 }
 .photo_card {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border: 1px solid #808080;
   width: 360px;
   height: 200px;
+  position: relative;
+  }
+.photo_link {
+  display: flex;
+  object-fit: fill; 
+  overflow: hidden; 
 }
+/* .photoLarge {
+  display: flex;
+  object-fit: fill; 
+  overflow: hidden; 
+  outline-style: none;
+} */
+.photo_rate {
+  position: absolute;
+  z-index: 999;
+  top: 156.5px;
+  left: -0.5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 360px;
+  height: 48;
+  background-color: #FFFFFF;
+  text-decoration: none;
+  color: #2E2F42;
+  border: 1px solid #808080;  
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.04px;
+}
+/* .loader {
+  visibility: hidden;
+} */

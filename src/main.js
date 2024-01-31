@@ -25,11 +25,11 @@ function handleSearch(event) {
     const form = event.currentTarget;
     const photoWrd = form.elements.photoWrd.value;
     console.log(photoWrd);
-    
+     
     
     searchPhotoByWrd(photoWrd).then((data) => {
       console.log(data);
-
+       
      
         if (data.hits.length === 0) {
         iziToast.error({
@@ -46,39 +46,35 @@ function handleSearch(event) {
         });   return;
       }
       //   const listOfPhotos = data.hits;
-      let markup = "";
-      refs.gallery.innerHTML = markup;
-      data.hits.forEach((i) => {
-        
+       //   const gallery = $('.gallery a').SimpleLightbox();
+       
+    let markup = "";
+      data.hits.forEach((i) => {        
        console.log(i);
        markup += createPhotoCardMarkup(i);
-       });      
-      
-    //   const gallery = $('.gallery a').SimpleLightbox();
-      lightbox .refresh();
-          
-    })
-    .finally(() => {        
-       
-        form.reset()});
+       });    
+         
+    refs.gallery.innerHTML = markup;
+    lightbox .refresh();      
+    }).finally(() => {               
+      form.reset()});
 }
-
+      
 function searchPhotoByWrd(photoWrd) {
+    
     const urlParams = new URLSearchParams({
         key: API_KEY,
         q: photoWrd,
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-    });
+    }); 
     return fetch(`${BASE_URL}/?${urlParams}`).then((res) => {
         if (!res.ok) {
         throw new Error(res.statusText);      
-        }
-       
+        }       
         return res.json();
     }).catch(error => console.log(error))  
-    
 }  
 
 function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views, comments, downloads,
@@ -87,13 +83,16 @@ function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views,
     <li class="photo_card">
     <a class="photo_link" href="${webformatURL}">
     <img class="photoLarge" src="${largeImageURL}" alt="${tags}"/>
-    <p class="like">likes: "${likes}"</p>
-    <p class="views">views: "${views}"</p>
-    <p class="comments">comments: "${comments}"</p>
-    <p class="downloads">downloads: "${downloads}"</p>
+    <div class="photo_rate">
+    <p class="like box">likes: ${likes}</p>
+    <p class="views box">views: ${views}</p>
+    <p class="comments box">comments: ${comments}</p>
+    <p class="downloads box">downloads: ${downloads}</p>
+    </div>
     </a>
     </li>`;
 }
+// webformatURL largeImageURL photoLarge
 
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -104,8 +103,8 @@ captionSelector: "img",
 captionsData: "alt",
 captionPosition: "bottom",}); 
 
-//   showLoader();
- // hideLoader();
+// showloader();
+ // hideLoader(); 
 // var gallery = $('.gallery a').simpleLightbox();
 
 // <div class="gallery">

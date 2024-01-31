@@ -8,14 +8,13 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const BASE_URL = 'https://pixabay.com/api';
 const API_KEY = '42048563-a2c01b7234988bf152885bd8d';
 
-// https://pixabay.com/api/?key=42048563-a2c01b7234988bf152885bd8d&q=yellow+flowers&image_type=photo&orientation=horizontal&safesearch=true&pretty=true
-
 const refs = {
     form: document.getElementById('form'),
     resultContainer: document.getElementById('resultContainer'),
     loaderContainer: document.querySelector('.loader'),
     gallery: document.querySelector('.gallery'),
 };
+
 
 refs.form.addEventListener('submit', handleSearch);
 
@@ -28,40 +27,43 @@ function handleSearch(event) {
      
     
     searchPhotoByWrd(photoWrd).then((data) => {
+        
       console.log(data);
        
-     
-        if (data.hits.length === 0) {
+       if (data.hits.length === 0) {
         iziToast.error({
-            // title: 'Error',
-            // class:'error-svg',
             message: "Sorry, there are no images matching your search query. Please try again!",
-            // theme: 'dark',
-            // messageSize: '16px',
-            // messageColor: 'white',
-            // backgroundColor: '#ef4040',
+            theme: 'dark',
+            messageSize: '16px',
+            messageColor: 'white',
+            backgroundColor: '#ef4040',
             position: 'topRight',
-            // maxWidth: '390px',
-            // timeout: 5000,
+            maxWidth: '390px',
+            timeout: 5000,
         });   return;
       }
-      //   const listOfPhotos = data.hits;
-       //   const gallery = $('.gallery a').SimpleLightbox();
        
     let markup = "";
+    
       data.hits.forEach((i) => {        
        console.log(i);
+       
        markup += createPhotoCardMarkup(i);
+       
        });    
          
     refs.gallery.innerHTML = markup;
     lightbox .refresh();      
     }).finally(() => {               
+        
       form.reset()});
 }
-      
+
+// loaderContainer.style.display = 'block';
+// loaderContainer.style.display = 'none';
+
 function searchPhotoByWrd(photoWrd) {
-    
+
     const urlParams = new URLSearchParams({
         key: API_KEY,
         q: photoWrd,
@@ -74,7 +76,8 @@ function searchPhotoByWrd(photoWrd) {
         throw new Error(res.statusText);      
         }       
         return res.json();
-    }).catch(error => console.log(error))  
+    }).catch(error => console.log(error))
+           
 }  
 
 function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views, comments, downloads,
@@ -106,7 +109,6 @@ function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views,
     </a>
     </li>`;
 }
-// webformatURL largeImageURL photoLarge
 
 const lightbox = new SimpleLightbox('.gallery a', {
 caption: true,
@@ -116,6 +118,18 @@ captionSelector: "img",
 captionsData: "alt",
 captionPosition: "bottom",}); 
 
+
+
+
+
+
+
+
+
+
+
+
+
 // const loadingTextEl = document.querySelector('.loading-message');
 // const loaderEl = document.querySelector('.loader');
 
@@ -124,7 +138,7 @@ captionPosition: "bottom",});
   | ----css-Loader activation---
   |==============================
 */
-
+/*
 document.addEventListener('DOMContentLoaded', () => {
     // const formEl = document.querySelector('.search-form');
     // const loadingMessageEl = document.querySelector('.loading-message');
@@ -176,7 +190,7 @@ function downloadImages(photoWrd) {
     //   buttonEl.disabled = false;
     });
 }
-
+*/
 
 
 

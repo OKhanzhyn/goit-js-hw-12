@@ -61,14 +61,16 @@
     box-shadow: 10px 0 #2E2F42, 20px 0 #2E2F42;
   }
 }
-div {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center; 
+  align-content: center;
 }
 form[id="form"] {
   display: flex;
   align-items: center;
+  align-content: center;
   gap: 8px;
   margin-bottom: 20px;
   margin-top: 35px;

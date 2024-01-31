@@ -13,7 +13,7 @@ const API_KEY = '42048563-a2c01b7234988bf152885bd8d';
 const refs = {
     form: document.getElementById('form'),
     resultContainer: document.getElementById('resultContainer'),
-    loaderContainer: document.getElementsByClassName('.loader'),
+    loaderContainer: document.querySelector('.loader'),
     gallery: document.querySelector('.gallery'),
 };
 
@@ -34,15 +34,15 @@ function handleSearch(event) {
         if (data.hits.length === 0) {
         iziToast.error({
             // title: 'Error',
-            class:'error-svg',
+            // class:'error-svg',
             message: "Sorry, there are no images matching your search query. Please try again!",
-            theme: 'dark',
-            messageSize: '16px',
-            messageColor: 'white',
-            backgroundColor: '#ef4040',
+            // theme: 'dark',
+            // messageSize: '16px',
+            // messageColor: 'white',
+            // backgroundColor: '#ef4040',
             position: 'topRight',
-            maxWidth: '390px',
-            timeout: 5000,
+            // maxWidth: '390px',
+            // timeout: 5000,
         });   return;
       }
       //   const listOfPhotos = data.hits;
@@ -81,19 +81,32 @@ function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views,
 }) {
     return `    
     <li class="photo_card">
-    <a class="photo_link" href="${webformatURL}">
-    <img class="photoLarge" src="${largeImageURL}" alt="${tags}"/>
-    <div class="photo_rate">
-    <p class="like box">likes: ${likes}</p>
-    <p class="views box">views: ${views}</p>
-    <p class="comments box">comments: ${comments}</p>
-    <p class="downloads box">downloads: ${downloads}</p>
-    </div>
+    <a class="photo_link" href="${largeImageURL}">
+    <img class="photoLarge" src="${webformatURL}" alt="${tags}"/>
+    
+    <ul class="photo_rate">
+    <li class="property-item">
+      <p class="property-title">Likes</p>
+      <p class="property-value">${likes}</p>
+    </li>
+    <li class="property-item">
+      <p class="property-title">Views</p>
+      <p class="property-value">${views}</p>
+    </li>
+    <li class="property-item">
+      <p class="property-title">Comments</p>
+      <p class="property-value">${comments}</p>
+    </li>
+    <li class="property-item">
+      <p class="property-title">Downloads</p>
+      <p class="property-value">${downloads}</p>
+    </li>
+  </ul>  
+    
     </a>
     </li>`;
 }
 // webformatURL largeImageURL photoLarge
-
 
 const lightbox = new SimpleLightbox('.gallery a', {
 caption: true,
@@ -102,6 +115,73 @@ fadeSpeed: 250,
 captionSelector: "img",
 captionsData: "alt",
 captionPosition: "bottom",}); 
+
+// const loadingTextEl = document.querySelector('.loading-message');
+// const loaderEl = document.querySelector('.loader');
+
+/**
+  |==============================
+  | ----css-Loader activation---
+  |==============================
+*/
+
+document.addEventListener('DOMContentLoaded', () => {
+    // const formEl = document.querySelector('.search-form');
+    // const loadingMessageEl = document.querySelector('.loading-message');
+  
+    if (!loaderContainer) {
+      console.error('Form or loading message element not found.');
+      return;
+    }  
+    loaderContainer.style.display = 'none';
+  
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+  
+    //   const searchKey = form.elements.search.value.trim();
+  
+      if (!photoWrd) {
+        createMessage('Search must be filled!');
+        return;
+      }
+  
+      formEl.reset();
+  
+      try {
+        loaderContainer.style.display = 'block';
+        await downloadImages(photoWrd);
+      } catch (error) {
+        console.error('Error downloading images:', error.message);
+        createMessage('Error downloading images. Please try again later.');
+      } finally {
+        loaderContainer.style.display = 'none';
+      }
+})
+});
+
+function downloadImages(photoWrd) {
+  loaderContainer.style.display = 'block';
+//   buttonEl.disabled = true;
+//   buttonEl.blur();
+  gallery.innerHTML = '';
+
+  fetchImages(photoWrd)
+    .then(images => renderImages(images))
+    .catch(error => {
+      console.error(error);
+      createMessage('Error fetching images. Please try again later.');
+    })
+    .finally(() => {
+    loaderContainer.style.display = 'none';
+    //   buttonEl.disabled = false;
+    });
+}
+
+
+
+
+
+
 
 // showloader();
  // hideLoader(); 

@@ -115,10 +115,10 @@ try {
        refs.gallery.insertAdjacentHTML('beforeend', markup );
     lightbox .refresh();  
 
-            maxPage = Math.ceil((data.total) / perPage);
+/*!додано*/   maxPage = Math.ceil((data.total) / perPage);
           console.log(maxPage);
 
-    if (data.hits.length > 0 && data.hits.length !== totalResults) /*!додано*/ {
+/*!додано*/  if (data.hits.length > 0 && data.hits.length !== data.total.length)  {
         refs.loadMoreBtn.classList.remove(hiddenClass); 
         refs.loadMoreBtn.addEventListener('click', handleLoadMore);
     } else {
@@ -132,6 +132,10 @@ try {
     finally {
         refs.preloader.classList.add(hiddenClass);
         refs.loadMoreBtn.disabled = false;
+
+        if (page === maxPage) {
+            refs.loadMoreBtn.classList.add(hiddenClass);
+        }
     //     refs.preloader.style.display = 'none';
     //     refs.loadMoreBtn.disabled = false;
     }

@@ -91,6 +91,7 @@ input[type="text"] {
   padding-right: 8px;
   margin: 0;
   outline: none;
+  cursor: auto;
 }
 input[type="text"]:hover {
   border-color: #000000;
@@ -99,7 +100,7 @@ input[type="text"]:focus {
   border-color: #4E75FF;
   color:#2E2F42;
 }
-button[type="submit"] {
+.btnSrch {
   height: 40px;
   width: 91px;
   border-radius: 8px;
@@ -112,8 +113,9 @@ button[type="submit"] {
   background-color: #4E75FF;
   color: #FFFFFF;
   margin: 0;
+  cursor: auto;
 }
-button[type="submit"]:hover {
+.btnSrch:hover {
   background-color: #6C8CFF;
 }
 
@@ -205,15 +207,24 @@ margin: 0;
   margin: 0;
   padding: 1px 0;
 }
-/* .box {
-  display: flex;
-  flex-direction: column;
+.load-btn {
+  height: 40px;
+  width: 125px;
+  border-radius: 8px;
+  border: none;
   font-family: Montserrat;
-  font-weight: 400;
-  font-size: 12px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04px;
-} */
-/* .loader {
-  visibility: hidden;
-} */
+  background-color: #4E75FF;
+  color: #FFFFFF;
+  margin-top: 15px;
+  cursor: auto;
+}
+.load-btn:hover {
+  background-color: #6C8CFF;
+} 
+.load-btn.is-hidden {
+  display: none;
+}

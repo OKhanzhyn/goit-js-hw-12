@@ -225,6 +225,25 @@ margin: 0;
 .load-btn:hover {
   background-color: #6C8CFF;
 } 
+.load-btn:disabled {
+  background-color: #CFCFCF;
+    color: #989898;
+    cursor: not-allowed;
+  }
 .load-btn.is-hidden {
+  display: none;
+}
+.loader-more {
+  color: #2E2F42;
+  position: relative;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04px;
+  font-family: Montserrat;
+  box-sizing: border-box;
+  margin-top: 10px;
+  /* display: none; */
+}
+.loader-more.is-hidden {
   display: none;
 }

@@ -18,21 +18,3 @@ function searchPhotoByWrd(photoWrd, page = 1) {
     }).then(({ data }) => data);
 }
 export { searchPhotoByWrd };
-
-//     const urlParams = new URLSearchParams({
-//         key: API_KEY,
-//         q: photoWrd,
-//         image_type: 'photo',
-//         orientation: 'horizontal',
-//         safesearch: true,
-//         page: 1,
-//         per_page: 15
-//     }); 
-//     return fetch(`${BASE_URL}/?${urlParams}`).then((res) => {
-//         if (!res.ok) {
-//         throw new Error(res.statusText);      
-//         }       
-//         return res.json();
-//     }).catch(error => console.log(error))
-           
-// }  

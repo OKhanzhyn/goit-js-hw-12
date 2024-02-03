@@ -1,4 +1,4 @@
-export default function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views, comments, downloads 
+export default function createPhotoCardMarkup({webformatURL, largeImageURL, tags, likes, views, comments, downloads, 
 }) {
     return `    
     <li class="photo_card">

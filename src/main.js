@@ -15,14 +15,16 @@ const refs = {
     loadMoreBtn: document.querySelector('.load-btn'),
 };
 const hiddenClass = 'is-hidden';
+// let page = 1;
+// let photoWrd = '';
 
 refs.form.addEventListener('submit', handleSearch);
 
 async function handleSearch(event) {
     event.preventDefault();
-
+    // page = 1;
     const form = event.currentTarget;
-    const photoWrd = form.elements.photoWrd.value;
+    const photoWrd = form.elements.photoWrd.value.trim();
          
     if(!photoWrd) {
         iziToast.error({
@@ -65,6 +67,9 @@ try {
     lightbox .refresh();  
     if (data.hits.length > 0) {
         refs.loadMoreBtn.classList.remove(hiddenClass); 
+
+        refs.loadMoreBtn.addEventListener('click', handleLoadMore);
+
     } else {
         refs.loadMoreBtn.classList.add(hiddenClass); 
     }       
@@ -76,7 +81,54 @@ try {
       form.reset();
     }
 }
+// async function handleLoadMore () {
+// page += 1;
+// try {
+//     await searchPhotoByWrd(photoWrd, page).then((data) => {   
+//         console.log(data);
+       
+    //    if (data.hits.length === 0) {
+    //     iziToast.error({
+    //         message: "Sorry, there are no images matching your search query. Please try again!",
+    //         theme: 'dark',
+    //         messageSize: '16px',
+    //         messageColor: 'white',
+    //         backgroundColor: '#ef4040',
+    //         position: 'topRight',
+    //         maxWidth: '390px',
+    //         timeout: 5000,
+    //     });   return;
+    //   }
+       
+    // let markup = "";    
+    //   data.hits.forEach((i) => {        
+    //    console.log(i);
+    //    markup += createPhotoCardMarkup(i);
+    //    });             
+    // refs.gallery.innerHTML = markup;
+    // lightbox .refresh();  
+    // if (data.hits.length > 0) {
+    //     refs.loadMoreBtn.classList.remove(hiddenClass); 
+    //     refs.loadMoreBtn.addEventListener('click', handleLoadMore);
+    // } else {
+    //     refs.loadMoreBtn.classList.add(hiddenClass); 
+    // }       
+//     })} catch (err) {
+//         console.log(err);
+//     }
 
+// }
+const lightbox = new SimpleLightbox('.gallery a', {
+    caption: true,
+    captionDelay: 250,
+    fadeSpeed: 250,
+    captionSelector: "img",
+    captionsData: "alt",
+    captionPosition: "bottom",}); 
+
+
+    
+    
     //   function handleSearch(event) {
     //     event.preventDefault();
     
@@ -171,10 +223,3 @@ try {
 //     </li>`;
 // }
 
-const lightbox = new SimpleLightbox('.gallery a', {
-caption: true,
-captionDelay: 250,
-fadeSpeed: 250,
-captionSelector: "img",
-captionsData: "alt",
-captionPosition: "bottom",}); 

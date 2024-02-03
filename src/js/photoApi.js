@@ -7,7 +7,7 @@ function searchPhotoByWrd(photoWrd) {
     return axios
     .get(`${BASE_URL}`, {
         params: {
-            key: API_KEY,
+        key: API_KEY,
         q: photoWrd,
         image_type: 'photo',
         orientation: 'horizontal',

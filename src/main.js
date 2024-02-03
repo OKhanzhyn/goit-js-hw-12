@@ -115,17 +115,16 @@ try {
        refs.gallery.insertAdjacentHTML('beforeend', markup );
     lightbox .refresh();  
 
-/*!додано*/   maxPage = Math.ceil((data.total) / perPage);
+/*!додано*/   maxPage = Math.ceil(data.total / perPage);
           console.log(maxPage);
 
-/*!додано*/  if (data.hits.length > 0 && data.hits.length !== data.total.length)  {
+/*!додано*/  if (data.hits.length > 0 && data.hits.length != data.total)  {
         refs.loadMoreBtn.classList.remove(hiddenClass); 
         refs.loadMoreBtn.addEventListener('click', handleLoadMore);
     } else {
         refs.loadMoreBtn.classList.add(hiddenClass); 
     }       
-    // refs.preloader.classList.add(hiddenClass);
-    //     refs.loadMoreBtn.disabled = false;
+    
     })} catch (err) {
         console.log(err);
     } 
@@ -133,13 +132,11 @@ try {
         refs.preloader.classList.add(hiddenClass);
         refs.loadMoreBtn.disabled = false;
 
-        if (page === maxPage) {
+/*!додано*/ if (page === maxPage) {
             refs.loadMoreBtn.classList.add(hiddenClass);
+            refs.loadMoreBtn.removeEventListener('click', handleLoadMore);
         }
-    //     refs.preloader.style.display = 'none';
-    //     refs.loadMoreBtn.disabled = false;
-    }
-
+     }
 }
 
 const lightbox = new SimpleLightbox('.gallery a', {

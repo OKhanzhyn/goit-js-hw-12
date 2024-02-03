@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 11</title>
+    <title>Homework 12</title>
     
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +13,13 @@
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
     <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-46aac873.js">
     <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-eb6030bc.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-1613db63.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-13dc26b1.css">
   </head>
   <body>
     <div class="container">
      <form id="form">
       <input type="text" placeholder="Search images..." name="photoWrd" />
-      <button type="submit">Search</button>
+      <button class="btnSrch" type="submit">Search</button>
      </form>
     
      <div class="loader">
@@ -28,10 +28,18 @@
      <div id="resultContainer" >
       <ul class="gallery"></ul>
      </div>
+
+     <div class="load-more">
+      <span class="loader-more"></span>
+     <button class="load-btn is-hidden" type="submit">Load more</button>
     </div>
 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
-   
+
+    <span class="scroll-to-top-btn"></span>
+
   </body>
 </html>
 <!-- <span class="loader"></span> -->

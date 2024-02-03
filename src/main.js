@@ -18,6 +18,8 @@ const refs = {
 const hiddenClass = 'is-hidden';
 let page = 1;
 let photoWrd = '';
+let maxPage = 0; /* додано*/
+let perPage = 15; /* додано*/
 
 refs.form.addEventListener('submit', handleSearch);
 
@@ -112,7 +114,11 @@ try {
        });             
        refs.gallery.insertAdjacentHTML('beforeend', markup );
     lightbox .refresh();  
-    if (data.hits.length > 0) {
+
+            maxPage = Math.ceil((data.total) / perPage);
+          console.log(maxPage);
+
+    if (data.hits.length > 0 && data.hits.length !== totalResults) /*!додано*/ {
         refs.loadMoreBtn.classList.remove(hiddenClass); 
         refs.loadMoreBtn.addEventListener('click', handleLoadMore);
     } else {
